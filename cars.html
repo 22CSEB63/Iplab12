@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Gallery</title>
+    <style>
+        /* Style for car gallery */
+        #cars {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }    
+
+        /* Style for individual cars */
+        .car {
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Style for car details */
+        .car-details {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <label for="carInput">Car:</label>
+    <input type="text" id="t1"><br>
+    <button onclick="fun()">View Cars</button>
+    <div id="cars"></div>
+
+    <script>
+        function fun() {
+            var car = new XMLHttpRequest();
+            var t1 = document.getElementById("t1").value;
+            car.onreadystatechange = function() {
+                if (car.readyState === 4 && car.status === 200) {
+                    var data = car.responseXML;
+                    console.log(data);
+                    var cars = data.getElementsByTagName("car");
+                    var output = "";
+                    for (var i = 0; i < cars.length; i++) {
+                        var company = cars[i].getElementsByTagName("company")[0].textContent;
+                        var model = cars[i].getElementsByTagName("Model")[0].textContent;
+                        var year = cars[i].getElementsByTagName("Year")[0].textContent;
+                        var color = cars[i].getElementsByTagName("color")[0].textContent;
+                        
+                        if (company.toLowerCase().includes(t1.toLowerCase()) || 
+                            model.toLowerCase().includes(t1.toLowerCase()) || 
+                            year.toLowerCase().includes(t1.toLowerCase()) || 
+                            color.toLowerCase().includes(t1.toLowerCase())) {
+                            output += "<div class='car'>";
+                            output += "<p><b>Company:</b> " + company + "<br>";
+                            output += "<b>Model:</b> " + model + "<br>";
+                            output += "<b>Year:</b> " + year + "<br>";
+                            output += "<b>Color:</b> " + color + "</p>";
+                            output += "</div>";
+                        }
+                    }
+                    document.getElementById("cars").innerHTML = output;
+                }
+            };
+            car.open("GET", "carsxml.xml", true);
+            car.send();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cars>
+    <car>
+        <company>Maruti Suzuki</company>
+        <Model>Ertiga</Model>
+        <Year>2023</Year>
+        <color>Blue</color>
+    </car>
+    <car>
+        <company>Honda</company>
+        <Model>Brio</Model>
+        <Year>2022</Year>
+        <color>Red</color>
+    </car>
+    <car>
+        <company>MS</company>
+        <Model>Eeco</Model>
+        <Year>2023</Year>
+        <color>Gray</color>
+    </car>
+</cars>
